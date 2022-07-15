@@ -8,7 +8,7 @@ const PRIVATE_KEY = process.env.PRIVATE_KEY;
 
 
 export const userLogin = async (req: Request, res: Response) => {
-    console.log("reached here...");
+   
     
   const { email, password } = req.body;
   try {
@@ -18,7 +18,7 @@ export const userLogin = async (req: Request, res: Response) => {
         messgae: `No user with email ${email} exists.`,
       });
     }
-    if (!bcrypt.compare(password, user.Password))
+    if (user.password!==password)
       res.status(500).json({
         messgae: `you have entered an invalid password.`,
       });
