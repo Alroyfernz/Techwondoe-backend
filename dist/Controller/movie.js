@@ -21,7 +21,7 @@ const newMovie = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const movie = new Movie_1.default(req.body);
         const savedMovie = yield movie.save();
         yield User_1.default.updateOne({ _id: userId }, { $push: { MovieList: savedMovie._id } });
-        res.status(200).json({
+        return res.status(200).json({
             message: "New Move has been added to list",
             data: savedMovie,
         });
@@ -42,12 +42,12 @@ const removeMovie = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
             movie != movieId;
         });
         yield User_1.default.updateOne({ _id: userId }, { $set: { MovieList: filteredList } });
-        res.status(200).json({
+        return res.status(200).json({
             message: "Movie succesfully removed from list..",
         });
     }
     catch (error) {
-        res.status(404).json({
+        return res.status(404).json({
             message: `Error caused due to ${error.message}`,
         });
     }
@@ -58,13 +58,13 @@ const updateMovie = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     const { update } = req.body;
     try {
         const updatedMovie = yield Movie_1.default.findOneAndUpdate({ _id: movieId }, { $set: update }, { new: true });
-        res.status(200).json({
+        return res.status(200).json({
             message: "Movie updated succesfully.",
             data: updatedMovie
         });
     }
     catch (error) {
-        res.status(404).json({
+        return res.status(404).json({
             message: `Error caused due to ${error.message}`,
         });
     }

@@ -21,7 +21,7 @@ const userLogin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const user = yield User_1.default.findOne({ Email: email });
         if (!user) {
-            res.status(500).json({
+            return res.status(500).json({
                 messgae: `No user with email ${email} exists.`,
             });
         }
@@ -47,7 +47,7 @@ const userInfo = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { userId } = req.params;
     try {
         const userData = yield User_1.default.findById(userId).populate("MovieList");
-        res.status(200).json({
+        return res.status(200).json({
             message: "User Data fetched succesfully",
             data: userData
         });
@@ -63,7 +63,7 @@ const userRegister = (req, res) => __awaiter(void 0, void 0, void 0, function* (
     try {
         const user = new User_1.default(req.body);
         yield user.save();
-        res.status(200).json("user saved succ.");
+        return res.status(200).json("user saved succ.");
     }
     catch (error) {
     }

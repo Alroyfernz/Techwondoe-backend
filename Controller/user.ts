@@ -7,15 +7,13 @@ import jwt from "jsonwebtoken";
 const PRIVATE_KEY = process.env.PRIVATE_KEY;
 
 
-export const userLogin = async (req: Request, res: Response) => {
- 
-   
-    
+export const userLogin = async (req: Request, res: Response) :Promise<Response<any, Record<string, any>>|undefined>=> {
+
   const { email, password } = req.body;
   try {
     const user:any = await UserModel.findOne({ Email: email });
     if (!user) {
-      res.status(500).json({
+      return res.status(500).json({
         messgae: `No user with email ${email} exists.`,
       });
     }
@@ -37,11 +35,11 @@ export const userLogin = async (req: Request, res: Response) => {
 };
 
 
-export const userInfo= async (req: Request, res: Response) => {
+export const userInfo= async (req: Request, res: Response) :Promise<Response<any, Record<string, any>>|undefined>=> {
     const {userId}=req.params;
     try {
         const userData=await UserModel.findById(userId).populate("MovieList");
-        res.status(200).json({
+        return res.status(200).json({
             message:"User Data fetched succesfully",
 data:userData
         })
@@ -51,11 +49,11 @@ data:userData
         })
       }
 }
-export const userRegister=async(req: Request, res: Response)=>{
+export const userRegister=async(req: Request, res: Response):Promise<Response<any, Record<string, any>>|undefined>=>{
 try {
     const user= new UserModel(req.body);
     await user.save();
-    res.status(200).json("user saved succ.")
+    return res.status(200).json("user saved succ.")
 } catch (error) {
     
 }
