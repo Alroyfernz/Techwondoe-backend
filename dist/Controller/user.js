@@ -14,25 +14,23 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.userRegister = exports.userInfo = exports.userLogin = void 0;
 const User_1 = __importDefault(require("../Model/User"));
-const bcrypt_1 = __importDefault(require("bcrypt"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const PRIVATE_KEY = process.env.PRIVATE_KEY;
 const userLogin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log("reached here...");
     const { email, password } = req.body;
     try {
-        const user = yield User_1.default.find({ Email: email });
+        const user = yield User_1.default.findOne({ Email: email });
         if (!user) {
             res.status(500).json({
                 messgae: `No user with email ${email} exists.`,
             });
         }
-        if (!bcrypt_1.default.compare(password, user.Password))
-            res.status(500).json({
+        if (user.Password != password)
+            return res.status(500).json({
                 messgae: `you have entered an invalid password.`,
             });
         const token = jsonwebtoken_1.default.sign({ email: user.email }, PRIVATE_KEY);
-        res.status(200).json({
+        return res.status(200).json({
             message: "User Login succesfull",
             token,
             data: user,

@@ -8,22 +8,23 @@ const PRIVATE_KEY = process.env.PRIVATE_KEY;
 
 
 export const userLogin = async (req: Request, res: Response) => {
+ 
    
     
   const { email, password } = req.body;
   try {
-    const user:any = await UserModel.find({ Email: email });
+    const user:any = await UserModel.findOne({ Email: email });
     if (!user) {
       res.status(500).json({
         messgae: `No user with email ${email} exists.`,
       });
     }
-    if (user.password!==password)
-      res.status(500).json({
+    if (user.Password!=password)
+      return res.status(500).json({
         messgae: `you have entered an invalid password.`,
       });
     const token = jwt.sign({ email: user.email }, PRIVATE_KEY as string);
-    res.status(200).json({
+    return res.status(200).json({
       message: "User Login succesfull",
       token,
       data: user,
