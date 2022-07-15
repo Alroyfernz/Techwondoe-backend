@@ -4,17 +4,19 @@ import movieRoute from "./Routes/movie";
 import userRoute from "./Routes/user"
 import express,{Express} from "express";
 import mongoose from "mongoose";
-
+import cors from "cors";
 const PORT=process.env.PORT;
 const MONGO_URL=process.env.MONGO_URL;
 const app:Express=express();
+app.use(cors({
+    origin:"*",
+    methods:["GET","POST","PUT","DELETE"]
+}))
 app.use(express.json());
-
 mongoose.connect(MONGO_URL as string,()=>{
     console.log('connection to database succesfull..');
     
 });
-
 app.use('/movie',movieRoute);
 app.use('/user',userRoute);
 
