@@ -1,5 +1,13 @@
-import { model, Schema } from "mongoose";
+import { model, ObjectId, Schema } from "mongoose";
 const {ObjectId}=Schema.Types;
+
+
+export interface IUser extends Document {
+   FullName: string;
+   Email: string;
+   Password: number;
+   MovieList:typeof ObjectId[]
+  }
 const userScehma = new Schema(
   {
    FullName:{
@@ -22,4 +30,4 @@ const userScehma = new Schema(
   { timestamps: true }
 );
 
-export default model("User", userScehma);
+export default model<IUser>("User", userScehma);

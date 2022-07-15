@@ -1,5 +1,13 @@
-import { model, Schema } from "mongoose";
-const {ObjectId}=Schema.Types;
+import { model, Schema ,Document} from "mongoose";
+
+
+export interface IMovie extends Document {
+  Title: string;
+  StreamingApp: string;
+  Rating: number;
+  Review:string
+}
+
 const movieScehma = new Schema(
   {
     Title: {
@@ -24,4 +32,4 @@ const movieScehma = new Schema(
   { timestamps: true }
 );
 
-export default  model("Movie", movieScehma);
+export default  model<IMovie>("Movie", movieScehma);
