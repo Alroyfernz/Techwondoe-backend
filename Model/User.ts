@@ -1,13 +1,6 @@
 import { model, ObjectId, Schema } from "mongoose";
-const {ObjectId}=Schema.Types;
-
-
-export interface IUser extends Document {
-   FullName: string;
-   Email: string;
-   Password: number;
-   MovieList:typeof ObjectId[]
-  }
+import IUser from "../Interfaces/IUser";
+const {ObjectId}=Schema.Types; 
 const userScehma = new Schema(
   {
    FullName:{

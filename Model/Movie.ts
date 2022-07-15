@@ -1,12 +1,7 @@
-import { model, Schema ,Document} from "mongoose";
+import { model, Schema} from "mongoose";
+import {IMovie} from "../Interfaces/IMovie";
 
 
-export interface IMovie extends Document {
-  Title: string;
-  StreamingApp: string;
-  Rating: number;
-  Review:string
-}
 
 const movieScehma = new Schema(
   {

@@ -9,7 +9,7 @@ export const newMovie = async (req: Request, res: Response): Promise<Response<an
     const savedMovie = await movie.save();
     await UserModel.updateOne(
       { _id: userId },
-      { $push: { MovieList: savedMovie._id! } }
+      { $push: { MovieList: savedMovie._id } }
     );
     return res.status(200).json({
       message: "New Move has been added to list",
