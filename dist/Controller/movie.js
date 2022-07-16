@@ -38,10 +38,17 @@ const removeMovie = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     try {
         yield Movie_1.default.deleteOne({ _id: movieId });
         const { MovieList } = yield User_1.default.findOne({ _id: userId });
+        console.log(MovieList, movieId);
         const filteredList = MovieList.filter((movie) => {
-            movie != movieId;
+            const stringRef = movie.valueOf();
+            console.log(stringRef);
+            return stringRef != movieId;
         });
-        yield User_1.default.updateOne({ _id: userId }, { $set: { MovieList: filteredList } });
+        console.log(filteredList);
+        // await UserModel.updateOne(
+        //   { _id: userId },
+        //   { $set: { MovieList: filteredList } }
+        // );
         return res.status(200).json({
             message: "Movie succesfully removed from list..",
         });
@@ -60,7 +67,7 @@ const updateMovie = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         const updatedMovie = yield Movie_1.default.findOneAndUpdate({ _id: movieId }, { $set: update }, { new: true });
         return res.status(200).json({
             message: "Movie updated succesfully.",
-            data: updatedMovie
+            data: updatedMovie,
         });
     }
     catch (error) {

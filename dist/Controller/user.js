@@ -17,6 +17,7 @@ const User_1 = __importDefault(require("../Model/User"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const PRIVATE_KEY = process.env.PRIVATE_KEY;
 const userLogin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log(req.body);
     const { email, password } = req.body;
     try {
         const user = yield User_1.default.findOne({ Email: email });

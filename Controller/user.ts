@@ -2,12 +2,13 @@
 
 import UserModel from "../Model/User";
 import { Request, Response } from "express";
-import bcrypt from "bcrypt";
+
 import jwt from "jsonwebtoken";
 const PRIVATE_KEY = process.env.PRIVATE_KEY;
 
 
 export const userLogin = async (req: Request, res: Response) :Promise<Response<any, Record<string, any>>|undefined>=> {
+console.log(req.body);
 
   const { email, password } = req.body;
   try {
