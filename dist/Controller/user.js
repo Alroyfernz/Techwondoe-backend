@@ -67,6 +67,7 @@ const userRegister = (req, res) => __awaiter(void 0, void 0, void 0, function* (
         return res.status(200).json("user saved succ.");
     }
     catch (error) {
+        return res.status(500).json(error.message);
     }
 });
 exports.userRegister = userRegister;

@@ -6,5 +6,5 @@ const Router=express.Router();
 
 Router.post(URL.loginUrl,userLogin)
 Router.get( URL.fetchUser,Authentication,userInfo)
-// Router.post("/register",userRegister)
+
 export default Router;

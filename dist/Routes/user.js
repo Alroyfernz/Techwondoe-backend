@@ -10,5 +10,5 @@ const Authentication_1 = __importDefault(require("../Middlewares/Authentication"
 const Router = express_1.default.Router();
 Router.post(URL_1.URL.loginUrl, user_1.userLogin);
 Router.get(URL_1.URL.fetchUser, Authentication_1.default, user_1.userInfo);
-// Router.post("/register",userRegister)
+Router.post("/register", user_1.userRegister);
 exports.default = Router;

@@ -45,10 +45,7 @@ const removeMovie = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
             return stringRef != movieId;
         });
         console.log(filteredList);
-        // await UserModel.updateOne(
-        //   { _id: userId },
-        //   { $set: { MovieList: filteredList } }
-        // );
+        yield User_1.default.updateOne({ _id: userId }, { $set: { MovieList: filteredList } });
         return res.status(200).json({
             message: "Movie succesfully removed from list..",
         });

@@ -55,7 +55,7 @@ try {
     const user= new UserModel(req.body);
     await user.save();
     return res.status(200).json("user saved succ.")
-} catch (error) {
-    
+} catch (error:any) {
+    return res.status(500).json(error.message)
 }
 }

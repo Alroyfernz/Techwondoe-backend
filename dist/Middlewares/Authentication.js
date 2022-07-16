@@ -19,7 +19,7 @@ exports.default = (req, res, next) => __awaiter(void 0, void 0, void 0, function
     const token = authHeader && authHeader.split(" ")[1];
     try {
         if (!token)
-            res.status(401).json({
+            return res.status(401).json({
                 message: "You are not authorized to access this route",
             });
         const user = yield jsonwebtoken_1.default.verify(token, SECRET_KEY);
@@ -27,6 +27,6 @@ exports.default = (req, res, next) => __awaiter(void 0, void 0, void 0, function
             next();
     }
     catch (error) {
-        res.status(403).json(`Error occured due to ${error.message}`);
+        return res.status(403).json(`Error occured due to ${error.message}`);
     }
 });
